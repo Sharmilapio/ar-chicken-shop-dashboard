@@ -1,0 +1,301 @@
+Date,Chicken_Type,Sold_KG,Cost_Per_KG,Wastage_KG,Festival_Normal
+2026-01-01,Broiler,23.8,120,1.91,Normal
+2026-01-01,Country Chicken,28.9,220,0.77,Normal
+2026-01-01,Boneless,34.5,180,2.53,Normal
+2026-01-01,Leg Piece,30.7,150,0.89,Normal
+2026-01-01,Wings,24.0,130,1.1,Normal
+2026-01-02,Broiler,27.9,120,2.16,Normal
+2026-01-02,Country Chicken,23.9,220,0.86,Normal
+2026-01-02,Boneless,26.1,180,0.64,Normal
+2026-01-02,Leg Piece,31.6,150,2.03,Normal
+2026-01-02,Wings,30.2,130,1.35,Normal
+2026-01-03,Broiler,32.9,120,2.45,Normal
+2026-01-03,Country Chicken,18.9,220,1.0,Normal
+2026-01-03,Boneless,15.9,180,0.49,Normal
+2026-01-03,Leg Piece,28.7,150,2.07,Normal
+2026-01-03,Wings,34.4,130,1.47,Normal
+2026-01-04,Broiler,32.9,120,1.09,Normal
+2026-01-04,Country Chicken,23.8,220,1.27,Normal
+2026-01-04,Boneless,26.4,180,1.77,Normal
+2026-01-04,Leg Piece,32.1,150,2.51,Normal
+2026-01-04,Wings,39.2,130,1.64,Normal
+2026-01-05,Broiler,31.1,120,1.47,Normal
+2026-01-05,Country Chicken,20.8,220,1.41,Normal
+2026-01-05,Boneless,17.8,180,0.61,Normal
+2026-01-05,Leg Piece,15.1,150,1.13,Normal
+2026-01-05,Wings,28.3,130,1.96,Normal
+2026-01-06,Broiler,24.2,120,1.45,Normal
+2026-01-06,Country Chicken,17.8,220,0.5,Normal
+2026-01-06,Boneless,28.4,180,1.5,Normal
+2026-01-06,Leg Piece,26.3,150,1.93,Normal
+2026-01-06,Wings,27.7,130,1.63,Normal
+2026-01-07,Broiler,21.1,120,0.47,Normal
+2026-01-07,Country Chicken,23.7,220,0.83,Normal
+2026-01-07,Boneless,23.2,180,1.85,Normal
+2026-01-07,Leg Piece,19.7,150,0.47,Normal
+2026-01-07,Wings,20.6,130,0.84,Normal
+2026-01-08,Broiler,26.1,120,1.95,Normal
+2026-01-08,Country Chicken,28.3,220,1.37,Normal
+2026-01-08,Boneless,31.3,180,0.99,Normal
+2026-01-08,Leg Piece,15.5,150,0.41,Normal
+2026-01-08,Wings,29.4,130,1.54,Normal
+2026-01-09,Broiler,25.0,120,0.77,Normal
+2026-01-09,Country Chicken,28.9,220,1.48,Normal
+2026-01-09,Boneless,22.6,180,0.93,Normal
+2026-01-09,Leg Piece,27.6,150,1.25,Normal
+2026-01-09,Wings,16.8,130,0.47,Normal
+2026-01-10,Broiler,33.2,120,2.29,Normal
+2026-01-10,Country Chicken,20.3,220,1.78,Normal
+2026-01-10,Boneless,30.6,180,2.15,Normal
+2026-01-10,Leg Piece,24.0,150,0.94,Normal
+2026-01-10,Wings,16.9,130,1.41,Normal
+2026-01-11,Broiler,25.7,120,1.06,Normal
+2026-01-11,Country Chicken,35.9,220,1.16,Normal
+2026-01-11,Boneless,43.4,180,3.17,Normal
+2026-01-11,Leg Piece,39.7,150,1.99,Normal
+2026-01-11,Wings,37.2,130,2.26,Normal
+2026-01-12,Broiler,16.7,120,0.82,Normal
+2026-01-12,Country Chicken,15.8,220,0.86,Normal
+2026-01-12,Boneless,21.6,180,0.65,Normal
+2026-01-12,Leg Piece,17.1,150,1.05,Normal
+2026-01-12,Wings,18.4,130,1.56,Normal
+2026-01-13,Broiler,21.9,120,1.34,Normal
+2026-01-13,Country Chicken,15.5,220,1.35,Normal
+2026-01-13,Boneless,24.6,180,1.84,Normal
+2026-01-13,Leg Piece,16.7,150,0.9,Normal
+2026-01-13,Wings,24.8,130,2.12,Normal
+2026-01-14,Broiler,44.0,120,1.7,Festival
+2026-01-14,Country Chicken,38.9,220,2.2,Festival
+2026-01-14,Boneless,42.8,180,0.92,Festival
+2026-01-14,Leg Piece,56.7,150,4.69,Festival
+2026-01-14,Wings,32.0,130,1.88,Festival
+2026-01-15,Broiler,30.7,120,1.22,Festival
+2026-01-15,Country Chicken,30.4,220,2.16,Festival
+2026-01-15,Boneless,32.8,180,0.9,Festival
+2026-01-15,Leg Piece,36.0,150,1.3,Festival
+2026-01-15,Wings,17.0,130,1.0,Festival
+2026-01-16,Broiler,31.6,120,2.42,Normal
+2026-01-16,Country Chicken,21.3,220,1.85,Normal
+2026-01-16,Boneless,20.8,180,1.17,Normal
+2026-01-16,Leg Piece,20.1,150,1.72,Normal
+2026-01-16,Wings,18.3,130,0.42,Normal
+2026-01-17,Broiler,34.8,120,2.87,Normal
+2026-01-17,Country Chicken,30.0,220,2.47,Normal
+2026-01-17,Boneless,32.9,180,1.85,Normal
+2026-01-17,Leg Piece,21.3,150,1.58,Normal
+2026-01-17,Wings,28.2,130,1.3,Normal
+2026-01-18,Broiler,24.2,120,0.93,Normal
+2026-01-18,Country Chicken,27.3,220,1.01,Normal
+2026-01-18,Boneless,14.1,180,1.1,Normal
+2026-01-18,Leg Piece,14.6,150,0.48,Normal
+2026-01-18,Wings,21.9,130,1.78,Normal
+2026-01-19,Broiler,21.2,120,1.58,Normal
+2026-01-19,Country Chicken,34.4,220,1.89,Normal
+2026-01-19,Boneless,17.9,180,0.38,Normal
+2026-01-19,Leg Piece,19.6,150,0.57,Normal
+2026-01-19,Wings,28.6,130,0.82,Normal
+2026-01-20,Broiler,28.9,120,1.75,Normal
+2026-01-20,Country Chicken,19.0,220,1.45,Normal
+2026-01-20,Boneless,29.3,180,2.1,Normal
+2026-01-20,Leg Piece,17.6,150,0.5,Normal
+2026-01-20,Wings,33.6,130,1.61,Normal
+2026-01-21,Broiler,24.8,120,1.65,Normal
+2026-01-21,Country Chicken,34.1,220,1.37,Normal
+2026-01-21,Boneless,33.5,180,0.73,Normal
+2026-01-21,Leg Piece,26.1,150,1.68,Normal
+2026-01-21,Wings,17.1,130,0.51,Normal
+2026-01-22,Broiler,34.3,120,2.12,Normal
+2026-01-22,Country Chicken,33.7,220,2.57,Normal
+2026-01-22,Boneless,24.3,180,1.82,Normal
+2026-01-22,Leg Piece,15.4,150,0.43,Normal
+2026-01-22,Wings,31.6,130,2.39,Normal
+2026-01-23,Broiler,25.6,120,1.6,Normal
+2026-01-23,Country Chicken,32.4,220,2.02,Normal
+2026-01-23,Boneless,23.3,180,1.08,Normal
+2026-01-23,Leg Piece,23.5,150,1.54,Normal
+2026-01-23,Wings,32.3,130,1.67,Normal
+2026-01-24,Broiler,19.7,120,1.42,Normal
+2026-01-24,Country Chicken,31.3,220,0.86,Normal
+2026-01-24,Boneless,16.3,180,1.0,Normal
+2026-01-24,Leg Piece,17.9,150,1.39,Normal
+2026-01-24,Wings,21.2,130,0.64,Normal
+2026-01-25,Broiler,24.7,120,0.99,Normal
+2026-01-25,Country Chicken,24.4,220,0.69,Normal
+2026-01-25,Boneless,20.8,180,0.5,Normal
+2026-01-25,Leg Piece,25.0,150,0.59,Normal
+2026-01-25,Wings,36.2,130,2.45,Normal
+2026-01-26,Broiler,21.4,120,1.18,Normal
+2026-01-26,Country Chicken,32.5,220,2.59,Normal
+2026-01-26,Boneless,15.9,180,0.52,Normal
+2026-01-26,Leg Piece,19.7,150,0.74,Normal
+2026-01-26,Wings,26.4,130,1.3,Normal
+2026-01-27,Broiler,13.5,120,0.76,Normal
+2026-01-27,Country Chicken,10.2,220,0.8,Normal
+2026-01-27,Boneless,9.6,180,0.81,Normal
+2026-01-27,Leg Piece,10.2,150,0.81,Normal
+2026-01-27,Wings,19.8,130,1.75,Normal
+2026-01-28,Broiler,30.6,120,1.99,Normal
+2026-01-28,Country Chicken,30.6,220,0.9,Normal
+2026-01-28,Boneless,25.7,180,1.44,Normal
+2026-01-28,Leg Piece,32.2,150,1.69,Normal
+2026-01-28,Wings,22.7,130,1.47,Normal
+2026-01-29,Broiler,17.8,120,0.95,Normal
+2026-01-29,Country Chicken,23.3,220,0.85,Normal
+2026-01-29,Boneless,22.4,180,1.02,Normal
+2026-01-29,Leg Piece,21.5,150,1.0,Normal
+2026-01-29,Wings,28.7,130,1.17,Normal
+2026-01-30,Broiler,33.3,120,1.79,Normal
+2026-01-30,Country Chicken,21.6,220,1.24,Normal
+2026-01-30,Boneless,32.0,180,2.1,Normal
+2026-01-30,Leg Piece,31.1,150,1.78,Normal
+2026-01-30,Wings,27.7,130,1.11,Normal
+2026-01-31,Broiler,19.0,120,1.3,Normal
+2026-01-31,Country Chicken,32.2,220,0.94,Normal
+2026-01-31,Boneless,27.3,180,0.73,Normal
+2026-01-31,Leg Piece,29.5,150,0.76,Normal
+2026-01-31,Wings,33.7,130,1.0,Normal
+2026-02-01,Broiler,41.9,120,2.58,Normal
+2026-02-01,Country Chicken,41.4,220,3.13,Normal
+2026-02-01,Boneless,45.8,180,1.73,Normal
+2026-02-01,Leg Piece,36.2,150,0.96,Normal
+2026-02-01,Wings,36.9,130,1.18,Normal
+2026-02-02,Broiler,26.4,120,1.39,Normal
+2026-02-02,Country Chicken,25.5,220,1.87,Normal
+2026-02-02,Boneless,31.0,180,1.69,Normal
+2026-02-02,Leg Piece,27.0,150,2.3,Normal
+2026-02-02,Wings,17.4,130,0.49,Normal
+2026-02-03,Broiler,16.9,120,0.83,Normal
+2026-02-03,Country Chicken,18.3,220,1.23,Normal
+2026-02-03,Boneless,13.0,180,1.08,Normal
+2026-02-03,Leg Piece,18.2,150,0.71,Normal
+2026-02-03,Wings,13.4,130,0.56,Normal
+2026-02-04,Broiler,18.0,120,1.54,Normal
+2026-02-04,Country Chicken,23.8,220,1.11,Normal
+2026-02-04,Boneless,29.6,180,1.74,Normal
+2026-02-04,Leg Piece,33.7,150,2.51,Normal
+2026-02-04,Wings,24.6,130,1.14,Normal
+2026-02-05,Broiler,29.4,120,2.55,Normal
+2026-02-05,Country Chicken,17.4,220,1.38,Normal
+2026-02-05,Boneless,27.7,180,0.79,Normal
+2026-02-05,Leg Piece,26.8,150,1.82,Normal
+2026-02-05,Wings,15.2,130,0.79,Normal
+2026-02-06,Broiler,20.9,120,1.09,Normal
+2026-02-06,Country Chicken,23.8,220,0.98,Normal
+2026-02-06,Boneless,33.4,180,2.49,Normal
+2026-02-06,Leg Piece,17.2,150,1.54,Normal
+2026-02-06,Wings,32.6,130,1.3,Normal
+2026-02-07,Broiler,17.1,120,1.54,Normal
+2026-02-07,Country Chicken,28.3,220,1.85,Normal
+2026-02-07,Boneless,16.8,180,1.39,Normal
+2026-02-07,Leg Piece,15.6,150,0.57,Normal
+2026-02-07,Wings,17.9,130,1.33,Normal
+2026-02-08,Broiler,44.8,120,2.95,Normal
+2026-02-08,Country Chicken,21.2,220,0.43,Normal
+2026-02-08,Boneless,21.6,180,1.35,Normal
+2026-02-08,Leg Piece,41.9,150,1.54,Normal
+2026-02-08,Wings,43.2,130,1.04,Normal
+2026-02-09,Broiler,33.6,120,2.49,Normal
+2026-02-09,Country Chicken,29.0,220,2.28,Normal
+2026-02-09,Boneless,15.8,180,0.54,Normal
+2026-02-09,Leg Piece,17.5,150,0.97,Normal
+2026-02-09,Wings,29.9,130,1.92,Normal
+2026-02-10,Broiler,18.1,120,1.29,Normal
+2026-02-10,Country Chicken,18.9,220,0.74,Normal
+2026-02-10,Boneless,29.2,180,2.59,Normal
+2026-02-10,Leg Piece,27.2,150,0.65,Normal
+2026-02-10,Wings,27.3,130,0.63,Normal
+2026-02-11,Broiler,29.2,120,0.94,Normal
+2026-02-11,Country Chicken,16.8,220,0.55,Normal
+2026-02-11,Boneless,34.6,180,1.8,Normal
+2026-02-11,Leg Piece,30.7,150,1.98,Normal
+2026-02-11,Wings,26.4,130,0.8,Normal
+2026-02-12,Broiler,21.0,120,1.27,Normal
+2026-02-12,Country Chicken,29.0,220,1.9,Normal
+2026-02-12,Boneless,33.8,180,1.03,Normal
+2026-02-12,Leg Piece,25.2,150,1.22,Normal
+2026-02-12,Wings,24.5,130,0.69,Normal
+2026-02-13,Broiler,20.6,120,0.85,Normal
+2026-02-13,Country Chicken,23.6,220,1.48,Normal
+2026-02-13,Boneless,27.7,180,1.35,Normal
+2026-02-13,Leg Piece,23.2,150,0.82,Normal
+2026-02-13,Wings,26.8,130,1.13,Normal
+2026-02-14,Broiler,25.2,120,1.34,Festival
+2026-02-14,Country Chicken,21.1,220,1.27,Festival
+2026-02-14,Boneless,28.4,180,1.96,Festival
+2026-02-14,Leg Piece,30.2,150,1.98,Festival
+2026-02-14,Wings,23.0,130,1.73,Festival
+2026-02-15,Broiler,31.9,120,2.04,Normal
+2026-02-15,Country Chicken,30.0,220,1.68,Normal
+2026-02-15,Boneless,40.1,180,3.29,Normal
+2026-02-15,Leg Piece,45.1,150,2.49,Normal
+2026-02-15,Wings,34.3,130,2.61,Normal
+2026-02-16,Broiler,31.7,120,1.73,Normal
+2026-02-16,Country Chicken,17.3,220,0.43,Normal
+2026-02-16,Boneless,31.8,180,0.76,Normal
+2026-02-16,Leg Piece,20.6,150,0.89,Normal
+2026-02-16,Wings,18.5,130,0.78,Normal
+2026-02-17,Broiler,15.3,120,1.19,Normal
+2026-02-17,Country Chicken,32.1,220,1.48,Normal
+2026-02-17,Boneless,18.1,180,1.12,Normal
+2026-02-17,Leg Piece,17.4,150,0.79,Normal
+2026-02-17,Wings,34.2,130,3.07,Normal
+2026-02-18,Broiler,21.2,120,1.44,Normal
+2026-02-18,Country Chicken,29.1,220,1.37,Normal
+2026-02-18,Boneless,27.8,180,0.58,Normal
+2026-02-18,Leg Piece,19.2,150,1.09,Normal
+2026-02-18,Wings,18.3,130,0.58,Normal
+2026-02-19,Broiler,34.8,120,2.05,Normal
+2026-02-19,Country Chicken,31.8,220,2.84,Normal
+2026-02-19,Boneless,17.8,180,0.91,Normal
+2026-02-19,Leg Piece,22.9,150,0.59,Normal
+2026-02-19,Wings,30.1,130,1.52,Normal
+2026-02-20,Broiler,18.0,120,0.59,Normal
+2026-02-20,Country Chicken,33.1,220,0.77,Normal
+2026-02-20,Boneless,19.7,180,0.8,Normal
+2026-02-20,Leg Piece,24.8,150,1.51,Normal
+2026-02-20,Wings,24.9,130,0.64,Normal
+2026-02-21,Broiler,31.9,120,2.06,Normal
+2026-02-21,Country Chicken,28.0,220,1.87,Normal
+2026-02-21,Boneless,30.3,180,0.73,Normal
+2026-02-21,Leg Piece,22.3,150,1.29,Normal
+2026-02-21,Wings,21.8,130,1.72,Normal
+2026-02-22,Broiler,41.0,120,3.27,Normal
+2026-02-22,Country Chicken,33.9,220,2.84,Normal
+2026-02-22,Boneless,36.1,180,2.87,Normal
+2026-02-22,Leg Piece,29.4,150,1.61,Normal
+2026-02-22,Wings,34.6,130,0.95,Normal
+2026-02-23,Broiler,33.3,120,2.14,Normal
+2026-02-23,Country Chicken,18.6,220,0.81,Normal
+2026-02-23,Boneless,18.8,180,0.41,Normal
+2026-02-23,Leg Piece,33.5,150,1.72,Normal
+2026-02-23,Wings,21.2,130,1.31,Normal
+2026-02-24,Broiler,12.3,120,0.85,Normal
+2026-02-24,Country Chicken,16.6,220,1.47,Normal
+2026-02-24,Boneless,16.4,180,0.88,Normal
+2026-02-24,Leg Piece,18.1,150,1.51,Normal
+2026-02-24,Wings,17.6,130,1.54,Normal
+2026-02-25,Broiler,32.3,120,0.9,Normal
+2026-02-25,Country Chicken,29.6,220,1.5,Normal
+2026-02-25,Boneless,26.1,180,1.72,Normal
+2026-02-25,Leg Piece,34.4,150,3.06,Normal
+2026-02-25,Wings,20.8,130,1.48,Normal
+2026-02-26,Broiler,21.9,120,0.63,Normal
+2026-02-26,Country Chicken,15.8,220,1.18,Normal
+2026-02-26,Boneless,24.8,180,2.21,Normal
+2026-02-26,Leg Piece,24.3,150,2.15,Normal
+2026-02-26,Wings,23.2,130,1.75,Normal
+2026-02-27,Broiler,15.7,120,1.2,Normal
+2026-02-27,Country Chicken,20.1,220,1.56,Normal
+2026-02-27,Boneless,9.4,180,0.43,Normal
+2026-02-27,Leg Piece,9.6,150,0.27,Normal
+2026-02-27,Wings,17.1,130,1.2,Normal
+2026-02-28,Broiler,32.3,120,2.32,Normal
+2026-02-28,Country Chicken,31.0,220,0.73,Normal
+2026-02-28,Boneless,19.7,180,1.25,Normal
+2026-02-28,Leg Piece,32.2,150,0.65,Normal
+2026-02-28,Wings,25.3,130,1.71,Normal
+2026-03-01,Broiler,18.7,120,1.55,Normal
+2026-03-01,Country Chicken,23.0,220,0.84,Normal
+2026-03-01,Boneless,26.0,180,1.15,Normal
+2026-03-01,Leg Piece,26.0,150,1.06,Normal
+2026-03-01,Wings,21.7,130,1.04,Normal
