@@ -38,7 +38,14 @@ st.markdown("""
         text-align: center;
     }
     .kpi-title { font-size: 13px; color: #9fb4d9; margin-bottom: 6px; }
-    .kpi-value { font-size: 26px; font-weight: 700; color: #ffffff; }
+    .kpi-value {
+        font-size: clamp(16px, 1.6vw, 26px);
+        font-weight: 700;
+        color: #ffffff;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
     .kpi-delta-up { font-size: 12px; color: #4ade80; }
     .kpi-delta-down { font-size: 12px; color: #f87171; }
 
@@ -72,6 +79,47 @@ CHICKEN_TYPES = ["Broiler", "Country Chicken", "Boneless", "Leg Piece", "Wings"]
 DEFAULT_RATES = {"Broiler": 180, "Country Chicken": 320, "Boneless": 260,
                   "Leg Piece": 220, "Wings": 200}
 REQUIRED_COLS = ["Date", "Chicken_Type", "Sold_KG", "Cost_Per_KG", "Wastage_KG", "Festival_Normal"]
+
+
+# ----------------------------------------------------------------------------
+# LOGIN GATE
+# ----------------------------------------------------------------------------
+def check_login():
+    if "logged_in" not in st.session_state:
+        st.session_state.logged_in = False
+
+    if st.session_state.logged_in:
+        return
+
+    try:
+        valid_user = st.secrets["credentials"]["username"]
+        valid_pass = st.secrets["credentials"]["password"]
+    except Exception:
+        valid_user, valid_pass = "admin", "chicken123"
+
+    l, c, r = st.columns([1, 1.1, 1])
+    with c:
+        st.markdown(
+            "<h1 style='text-align:center; margin-top:60px;'>🐔</h1>"
+            "<h2 style='text-align:center;'>A.R Chicken Shop</h2>"
+            "<p style='text-align:center; color:#9fb4d9;'>Sign in to view your dashboard</p>",
+            unsafe_allow_html=True,
+        )
+        with st.form("login_form"):
+            username = st.text_input("Username")
+            password = st.text_input("Password", type="password")
+            submitted = st.form_submit_button("🔓 Login", use_container_width=True)
+
+        if submitted:
+            if username == valid_user and password == valid_pass:
+                st.session_state.logged_in = True
+                st.rerun()
+            else:
+                st.error("Incorrect username or password.")
+    st.stop()
+
+
+check_login()
 
 
 # ----------------------------------------------------------------------------
@@ -117,9 +165,203 @@ def generate_demo_data(months=2, seed=42):
 
 
 # ----------------------------------------------------------------------------
-# SIDEBAR - UPLOAD
+# SHOP CATALOG
 # ----------------------------------------------------------------------------
+PRODUCTS = [
+    {"id": "broiler_skin", "name": "Broiler Chicken (With Skin)", "unit": "kg",
+     "price": 180, "emoji": "🍗", "desc": "Farm fresh broiler, skin-on, cleaned & ready to cook."},
+    {"id": "broiler_noskin", "name": "Broiler Chicken (Without Skin)", "unit": "kg",
+     "price": 190, "emoji": "🍗", "desc": "Skinless broiler, low fat, ready to cook."},
+    {"id": "leg_piece", "name": "Chicken Leg Piece", "unit": "kg",
+     "price": 220, "emoji": "🍖", "desc": "Juicy bone-in leg pieces."},
+    {"id": "boneless", "name": "Boneless Chicken", "unit": "kg",
+     "price": 260, "emoji": "🍗", "desc": "Premium boneless cuts, curry ready."},
+    {"id": "country", "name": "Country Chicken (Naatu Kozhi)", "unit": "kg",
+     "price": 320, "emoji": "🐓", "desc": "Farm-raised, traditional taste."},
+    {"id": "wings", "name": "Chicken Wings", "unit": "kg",
+     "price": 200, "emoji": "🍗", "desc": "Perfect for grilling & frying."},
+]
+
+SPECIALS = [
+    {"id": "chili_chicken", "name": "Chili Chicken", "unit": "plate",
+     "price": 150, "emoji": "🌶️", "desc": "Freshly made hot & spicy chili chicken.",
+     "from_hour": 17, "to_hour": 23},
+]
+
+ORDERS_FILE = "shop_orders.csv"
+
+
+def _cart_total():
+    cart = st.session_state.get("cart", {})
+    total = 0
+    for pid, qty in cart.items():
+        item = next((p for p in PRODUCTS + SPECIALS if p["id"] == pid), None)
+        if item:
+            total += item["price"] * qty
+    return total
+
+
+def _save_order(name, phone, address, payment_mode):
+    cart = st.session_state.get("cart", {})
+    lines = []
+    for pid, qty in cart.items():
+        item = next((p for p in PRODUCTS + SPECIALS if p["id"] == pid), None)
+        if item:
+            lines.append(f"{item['name']} x{qty}{item['unit']}")
+    order_id = "ARC" + datetime.now().strftime("%Y%m%d%H%M%S")
+    row = pd.DataFrame([{
+        "Order_ID": order_id,
+        "Timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "Customer_Name": name,
+        "Phone": phone,
+        "Address": address,
+        "Items": " | ".join(lines),
+        "Total": _cart_total(),
+        "Payment_Mode": payment_mode,
+        "Status": "New",
+    }])
+    try:
+        existing = pd.read_csv(ORDERS_FILE)
+        combined = pd.concat([existing, row], ignore_index=True)
+    except FileNotFoundError:
+        combined = row
+    combined.to_csv(ORDERS_FILE, index=False)
+    return order_id
+
+
+def render_shop_page():
+    if "cart" not in st.session_state:
+        st.session_state.cart = {}
+
+    # ---- Top banner ----
+    st.markdown("""
+    <div style="background: linear-gradient(135deg, #7c2d12, #dc2626);
+                border-radius: 14px; padding: 26px 30px; margin-bottom: 20px;
+                display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
+        <div>
+            <div style="font-size:13px; color:#fecaca; letter-spacing:1px;">MOUTH-WATERING</div>
+            <div style="font-size:32px; font-weight:800; color:white;">FRESH CHICKEN, DAILY</div>
+            <div style="color:#fecaca; margin-top:6px;">Farm Fresh Meats — cleaned, cut & delivered fresh</div>
+        </div>
+        <div style="font-size:60px;">🐔</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    tab_shop, tab_cart, tab_orders = st.tabs(["🛒 Shop", f"🧺 Cart ({sum(st.session_state.cart.values())})", "📦 My Orders"])
+
+    # ---------------- SHOP TAB ----------------
+    with tab_shop:
+        now_hour = datetime.now().hour
+
+        st.markdown("### 🌶️ Evening Specials")
+        for item in SPECIALS:
+            is_open = item["from_hour"] <= now_hour < item["to_hour"]
+            c1, c2, c3 = st.columns([0.6, 3, 1.2])
+            with c1:
+                st.markdown(f"<div style='font-size:40px; text-align:center;'>{item['emoji']}</div>", unsafe_allow_html=True)
+            with c2:
+                st.markdown(f"**{item['name']}** — ₹{item['price']} / {item['unit']}")
+                st.caption(item["desc"])
+                if not is_open:
+                    st.caption(f"⏰ Available {item['from_hour']}:00 – {item['to_hour']}:00 only. Come back this evening!")
+            with c3:
+                if is_open:
+                    qty = st.number_input("Qty", min_value=1, value=1, step=1, key=f"qty_{item['id']}", label_visibility="collapsed")
+                    if st.button(f"Add to Cart", key=f"add_{item['id']}", use_container_width=True):
+                        st.session_state.cart[item["id"]] = st.session_state.cart.get(item["id"], 0) + qty
+                        st.success(f"Added {item['name']} to cart!")
+                        st.rerun()
+                else:
+                    st.button("🔒 Not available now", key=f"locked_{item['id']}", disabled=True, use_container_width=True)
+        st.markdown("---")
+
+        st.markdown("### 🍗 Our Fresh Chicken Range")
+        cols = st.columns(3)
+        for i, item in enumerate(PRODUCTS):
+            with cols[i % 3]:
+                st.markdown(f"""<div class="insight-box" style="text-align:center; min-height:190px;">
+                    <div style="font-size:38px;">{item['emoji']}</div>
+                    <div style="font-weight:700; margin:6px 0 2px;">{item['name']}</div>
+                    <div style="color:#9fb4d9; font-size:12px; margin-bottom:6px;">{item['desc']}</div>
+                    <div style="color:#ffd54a; font-weight:700; font-size:16px;">₹{item['price']} / {item['unit']}</div>
+                </div>""", unsafe_allow_html=True)
+                qty = st.number_input("Qty (kg)", min_value=0.5, value=1.0, step=0.5, key=f"qty_{item['id']}")
+                if st.button("🛒 Add to Cart", key=f"add_{item['id']}", use_container_width=True):
+                    st.session_state.cart[item["id"]] = st.session_state.cart.get(item["id"], 0) + qty
+                    st.success(f"Added {qty}kg {item['name']} to cart!")
+                    st.rerun()
+                st.write("")
+
+    # ---------------- CART TAB ----------------
+    with tab_cart:
+        cart = st.session_state.cart
+        if not cart:
+            st.info("Your cart is empty. Add items from the Shop tab!")
+        else:
+            st.markdown("### 🧺 Your Cart")
+            for pid in list(cart.keys()):
+                item = next((p for p in PRODUCTS + SPECIALS if p["id"] == pid), None)
+                if not item:
+                    continue
+                cc1, cc2, cc3, cc4 = st.columns([3, 1.2, 1.2, 0.8])
+                with cc1:
+                    st.markdown(f"**{item['emoji']} {item['name']}**")
+                with cc2:
+                    st.write(f"{cart[pid]} {item['unit']}")
+                with cc3:
+                    st.write(f"₹{item['price'] * cart[pid]:,.0f}")
+                with cc4:
+                    if st.button("❌", key=f"rm_{pid}"):
+                        del st.session_state.cart[pid]
+                        st.rerun()
+
+            st.markdown("---")
+            total = _cart_total()
+            st.markdown(f"<h3 style='text-align:right;'>Total: ₹{total:,.0f}</h3>", unsafe_allow_html=True)
+
+            st.markdown("### 📋 Delivery Details")
+            with st.form("checkout_form"):
+                name = st.text_input("Full Name")
+                phone = st.text_input("Phone Number")
+                address = st.text_area("Delivery Address")
+                payment = st.selectbox("Payment Mode", ["Cash on Delivery", "UPI", "Card"])
+                place_order = st.form_submit_button("✅ Place Order", use_container_width=True, type="primary")
+
+            if place_order:
+                if not name or not phone or not address:
+                    st.error("Please fill in your name, phone, and address.")
+                else:
+                    order_id = _save_order(name, phone, address, payment)
+                    st.session_state.cart = {}
+                    st.success(f"🎉 Order placed! Your Order ID is **{order_id}**. We'll contact you shortly.")
+                    st.balloons()
+
+    # ---------------- ORDERS TAB ----------------
+    with tab_orders:
+        st.markdown("### 📦 Order History")
+        try:
+            orders_df = pd.read_csv(ORDERS_FILE)
+            st.dataframe(orders_df.sort_values("Timestamp", ascending=False), use_container_width=True)
+            st.download_button("Download Orders CSV", orders_df.to_csv(index=False).encode("utf-8"),
+                                file_name="shop_orders.csv", mime="text/csv")
+        except FileNotFoundError:
+            st.info("No orders placed yet.")
+
+
+
 st.sidebar.markdown("## 🐔 A.R Chicken Shop")
+if st.sidebar.button("🔒 Logout"):
+    st.session_state.logged_in = False
+    st.rerun()
+
+st.sidebar.markdown("---")
+page = st.sidebar.radio("Navigate", ["🛒 Shop / Order", "📊 Analytics Dashboard"], index=0)
+st.sidebar.markdown("---")
+
+if page == "🛒 Shop / Order":
+    render_shop_page()
+    st.stop()
+
 st.sidebar.markdown("### 📁 Dataset")
 
 uploaded_file = st.sidebar.file_uploader(
@@ -406,7 +648,8 @@ c1, c2, c3 = st.columns([1.3, 1, 1])
 with c1:
     fig = px.line(daily, x="Date", y="Revenue", markers=True, title="Daily Sales Trend (Revenue)")
     fig.update_traces(line_color="#38bdf8")
-    fig.update_layout(template="plotly_dark", plot_bgcolor="#0d1a3b", paper_bgcolor="#0d1a3b", height=320)
+    fig.update_layout(template="plotly_dark", plot_bgcolor="#0d1a3b", paper_bgcolor="#0d1a3b", height=320,
+                       title_x=0.5, title_xanchor="center")
     st.plotly_chart(fig, use_container_width=True)
 
 with c2:
@@ -416,18 +659,24 @@ with c2:
         labels=["Profit Days", "Loss Days"], values=[profit_days, loss_days],
         hole=0.55, marker_colors=["#22c55e", "#ef4444"]
     )])
+    total_days = profit_days + loss_days
+    center_pct = int(profit_days / total_days * 100) if total_days else 0
+    fig.update_traces(textinfo='label+percent', textposition='inside', insidetextorientation='radial')
     fig.update_layout(template="plotly_dark", plot_bgcolor="#0d1a3b", paper_bgcolor="#0d1a3b",
-                       height=320, title="Profit vs Loss Days")
-    st.plotly_chart(fig, use_container_width=True)
+                       height=320, title="Profit vs Loss Days", title_x=0.5, title_xanchor="center")
+    # show a bold percentage in the donut center for quick readability
+    fig.add_annotation(text=f"{center_pct}%", x=0.5, y=0.5, font=dict(size=20, color='white'), showarrow=False)
+    st.plotly_chart(fig, width='stretch')
 
 with c3:
     fn = f.groupby("Festival_Normal")["Revenue"].mean().reindex(["Festival", "Normal"]).fillna(0)
     fig = px.bar(x=fn.index, y=fn.values, color=fn.index,
                  color_discrete_map={"Festival": "#22c55e", "Normal": "#3b82f6"},
                  title="Festival vs Normal Days (Avg Sales)")
+    fig.update_traces(texttemplate='%{y:.0f}', textposition='inside', textfont_color='white', insidetextanchor='middle')
     fig.update_layout(template="plotly_dark", plot_bgcolor="#0d1a3b", paper_bgcolor="#0d1a3b",
-                       height=320, showlegend=False, xaxis_title="", yaxis_title="Avg Revenue (₹)")
-    st.plotly_chart(fig, use_container_width=True)
+                       height=320, showlegend=False, xaxis_title="", yaxis_title="Avg Revenue (₹)", title_x=0.5, title_xanchor="center")
+    st.plotly_chart(fig, width='stretch')
 
 # ----------------------------------------------------------------------------
 # ROW: TOP 5 PROFIT DAYS | WASTAGE ANALYSIS | CORRELATION HEATMAP
@@ -438,22 +687,24 @@ with c4:
     top5 = daily.nlargest(5, "Profit").sort_values("Profit")
     fig = px.bar(top5, x="Profit", y=top5["Date"].dt.strftime("%d-%b-%Y"), orientation="h",
                  title="Top 5 Profit Days", color_discrete_sequence=["#22c55e"])
+    fig.update_traces(texttemplate='%{x:,.0f}', textposition='inside', textfont_color='white', insidetextanchor='middle')
     fig.update_layout(template="plotly_dark", plot_bgcolor="#0d1a3b", paper_bgcolor="#0d1a3b",
-                       height=340, yaxis_title="", xaxis_title="Profit (₹)")
-    st.plotly_chart(fig, use_container_width=True)
+                       height=340, yaxis_title="", xaxis_title="Profit (₹)", title_x=0.5, title_xanchor="center")
+    st.plotly_chart(fig, width='stretch')
 
 with c5:
     fig = px.bar(daily, x="Date", y="Wastage_KG", title="Wastage Analysis (KG)",
                  color_discrete_sequence=["#f97316"])
-    fig.update_layout(template="plotly_dark", plot_bgcolor="#0d1a3b", paper_bgcolor="#0d1a3b", height=340)
-    st.plotly_chart(fig, use_container_width=True)
+    fig.update_traces(texttemplate='%{y:.1f}', textposition='inside', textfont_color='white', insidetextanchor='middle')
+    fig.update_layout(template="plotly_dark", plot_bgcolor="#0d1a3b", paper_bgcolor="#0d1a3b", height=340, title_x=0.5, title_xanchor="center")
+    st.plotly_chart(fig, width='stretch')
 
 with c6:
     corr = daily[["Sold_KG", "Revenue", "Cost", "Profit", "Wastage_KG"]].corr()
     fig = px.imshow(corr, text_auto=".2f", color_continuous_scale="RdYlGn", zmin=-1, zmax=1,
                      title="Correlation Heatmap")
-    fig.update_layout(template="plotly_dark", plot_bgcolor="#0d1a3b", paper_bgcolor="#0d1a3b", height=340)
-    st.plotly_chart(fig, use_container_width=True)
+    fig.update_layout(template="plotly_dark", plot_bgcolor="#0d1a3b", paper_bgcolor="#0d1a3b", height=340, title_x=0.5, title_xanchor="center")
+    st.plotly_chart(fig, width='stretch')
 
 # ----------------------------------------------------------------------------
 # MONTHLY PROFIT COMPARISON  (the core ask: re-upload each month -> compare)
@@ -470,7 +721,7 @@ with mc1:
     fig.add_bar(x=monthly["Month"], y=monthly["Revenue"], name="Revenue", marker_color="#3b82f6")
     fig.add_bar(x=monthly["Month"], y=monthly["Profit"], name="Profit", marker_color="#22c55e")
     fig.update_layout(template="plotly_dark", plot_bgcolor="#0d1a3b", paper_bgcolor="#0d1a3b",
-                       barmode="group", height=320, title="Revenue vs Profit by Month")
+                       barmode="group", height=320, title="Revenue vs Profit by Month", title_x=0.5, title_xanchor="center")
     st.plotly_chart(fig, use_container_width=True)
 with mc2:
     st.dataframe(monthly.style.format({"Revenue": "₹{:,.0f}", "Profit": "₹{:,.0f}",
@@ -498,9 +749,15 @@ insights = [
     f"✅ Wastage is **{wastage_pct:.1f}%** of total sold quantity.",
     f"✅ Current profit margin stands at **{profit_margin:.1f}%** based on the rates set in the sidebar.",
 ]
-for ins in insights:
-    st.markdown(f"<div class='insight-box'>{ins}</div>", unsafe_allow_html=True)
 
+# Render insights as separate boxes but inside a centered column so width matches the rating badge
+cb_l, cb_c, cb_r = st.columns([0.2, 4.6, 0.2])
+with cb_c:
+    for ins in insights:
+        st.markdown(f"<div class='insight-box' style='text-align:center'>{ins}</div>", unsafe_allow_html=True)
+    st.write("")
+
+# compute rating
 if profit_margin >= 25:
     rating, stars = "EXCELLENT", "⭐⭐⭐⭐⭐"
 elif profit_margin >= 15:
@@ -510,34 +767,38 @@ elif profit_margin >= 5:
 else:
     rating, stars = "NEEDS ATTENTION", "⭐⭐"
 
+# Larger, centered rating badge (more prominent)
 st.write("")
-rate_l, rate_r = st.columns([2, 1.3])
-with rate_r:
-    st.markdown(f"""<div class="rating-badge">
-        <div style="font-size:13px; color:#9fb4d9;">OVERALL PERFORMANCE</div>
-        <div style="font-size:20px; font-weight:800; color:#ffd54a; margin:6px 0;">{rating}</div>
-        <div style="font-size:22px;">{stars}</div>
+rate_l, rate_c, rate_r = st.columns([0.2, 4.6, 0.2])
+with rate_c:
+    st.markdown(f"""<div class="rating-badge" style="padding:40px; width:100%; margin-bottom:8px;">
+        <div style="font-size:14px; color:#9fb4d9; letter-spacing:1px;">OVERALL PERFORMANCE</div>
+        <div style="font-size:36px; font-weight:800; color:#ffd54a; margin:12px 0;">{rating}</div>
+        <div style="font-size:36px;">{stars}</div>
     </div>""", unsafe_allow_html=True)
 
 # ----------------------------------------------------------------------------
 # DOWNLOADS
 # ----------------------------------------------------------------------------
-st.write("")
-st.markdown("### ⬇️ Download")
-d1, d2, d3 = st.columns([1.2, 1.2, 1])
+# extra spacing added here so this row (full data / chickenmetrics / monthly summary)
+# sits further down below the wider rating badge
+st.markdown("<div style='height:18px'></div>", unsafe_allow_html=True)
+# Single row for downloads and center branding, placed directly under the badge
+d1, d2, d3 = st.columns([1.2, 1.4, 1.2])
 with d1:
-    st.download_button("Download Full Data (with Revenue/Profit)",
+    st.download_button("⬇️ Download Full Data (with Revenue/Profit)",
                         df.to_csv(index=False).encode("utf-8"),
                         file_name="ar_chicken_full_data.csv", mime="text/csv",
-                        use_container_width=True)
+                        width='stretch')
 with d2:
-    st.download_button("Download Monthly Summary",
+    st.markdown(
+        "<p style='text-align:center; color:#38bdf8; font-style:italic; "
+        "letter-spacing:0.5px; margin-top:12px;'>"
+        "✨ A.R ChickenMetrics — Smart Poultry Analytics ✨</p>",
+        unsafe_allow_html=True,
+    )
+with d3:
+    st.download_button("⬇️ Download Monthly Summary",
                         monthly.to_csv(index=False).encode("utf-8"),
                         file_name="ar_chicken_monthly_summary.csv", mime="text/csv",
-                        use_container_width=True)
-
-st.markdown(
-    "<p style='text-align:center; color:#38bdf8; font-style:italic; letter-spacing:0.5px;'>"
-    "✨ A.R ChickenMetrics — Smart Poultry Analytics ✨</p>",
-    unsafe_allow_html=True,
-)
+                        width='stretch')

@@ -21,6 +21,11 @@
 
 ## How to use it
 
+- On the homepage, you will see a broiler-only shop view with fresh chicken
+  details, evening snack notes, and the bulk discount offer.
+- **Buy 10 kg or more** and the app applies **₹10 off per kg** to the broiler price.
+- **Evening snacks** such as Chilli Chicken are highlighted after 5 PM.
+- **Dashboard charts are shown only after login** using the sidebar login form.
 - **Upload your dataset** from the left sidebar (CSV file) — **any column
   names are fine now**, you don't need to rename anything in your file.
 - **Step 1 — Match your columns:** the app shows a one-time screen where you
