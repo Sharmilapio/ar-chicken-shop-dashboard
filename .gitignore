@@ -2,3 +2,6 @@ venv/
 __pycache__/
 *.pyc
 .streamlit/secrets.toml
+
+.streamlit/debug_enabled
+*.csv
